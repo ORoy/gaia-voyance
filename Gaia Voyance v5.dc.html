@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#FBF4EE;color:#2A1E33;font-family:'Figtree',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.55;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .14 0 0 0 0 .1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:#4A3358}
+a:hover{color:#2A1E33}
+:focus-visible{outline:2px solid #C06A4A;outline-offset:3px;border-radius:4px}
+summary{list-style:none;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+details[open] .fq-sign{transform:rotate(45deg)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</helmet>
+
+<sc-if value="{{ sheetMode }}" hint-placeholder-val="{{ true }}">
+<div style="background:#E3D6DA;min-height:100vh;padding:64px;display:flex;flex-direction:column;gap:56px;font-family:'Figtree',sans-serif">
+  <header style="display:flex;flex-direction:column;gap:12px;max-width:760px">
+    <h1 style="font-family:'Gloock',serif;font-weight:400;font-size:56px;line-height:1.05;margin:0">Gaia Voyance — maquette</h1>
+    <p style="font-size:18px;line-height:1.6;margin:0;color:#5A4763">Page unique, mobile d'abord. Une base parchemin calme et une seule section nocturne : les séances. <a href="{{ pageSrc }}" target="_blank">Ouvrir la page seule</a>.</p>
+  </header>
+
+  <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;max-width:1720px">
+    <div style="background:#FBF4EE;border-radius:6px;padding:40px;display:flex;flex-direction:column;gap:28px">
+      <p style="font-family:ui-monospace,Menlo,monospace;font-size:13px;margin:0;color:#5A4763">Typographie</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <p style="font-family:'Gloock',serif;font-size:64px;line-height:1;margin:0">Ce qui cherche à vous parvenir</p>
+        <p style="font-size:15px;line-height:1.55;margin:0;color:#5A4763;max-width:60ch"><strong style="color:#2A1E33">Gloock</strong> — titres. Serif à fort contraste, empattements nets comme une gravure sur cuivre, ronde et chaleureuse. Présence forte sans être « mystique ». Casse normale uniquement.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid rgba(43,37,25,.18);padding-top:24px">
+        <p style="font-size:20px;line-height:1.65;margin:0;max-width:60ch">Une rencontre avec vos guides, pour recevoir des réponses et un éclairage sur ce que vous traversez.</p>
+        <p style="font-size:15px;line-height:1.55;margin:0;color:#5A4763;max-width:60ch"><strong style="color:#2A1E33">Figtree</strong> — texte. Sans-serif géométrique douce, très lisible sur téléphone. 18–20 px, interligne 1,65, lignes de 60–68 caractères.</p>
+      </div>
+    </div>
+    <div style="background:#FBF4EE;border-radius:6px;padding:40px;display:flex;flex-direction:column;gap:20px">
+      <p style="font-family:ui-monospace,Menlo,monospace;font-size:13px;margin:0;color:#5A4763">Palette retenue</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:18px 14px">
+        <sc-for list="{{ palette }}" as="c" hint-placeholder-count="8">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="height:88px;border-radius:4px;background:{{ c.hex }};box-shadow:inset 0 0 0 1px rgba(43,37,25,.14)"></div>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <span style="font-weight:700;font-size:15px">{{ c.name }}</span>
+              <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#5A4763">{{ c.hex }}</span>
+              <span style="font-size:13px;line-height:1.4;color:#5A4763">{{ c.role }}</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <p style="font-size:14px;line-height:1.55;margin:0;color:#5A4763;max-width:62ch">Palette 4c : prune profond pour le menu, les séances et le pied de page ; crème rosée pour la lecture ; abricot pour tous les boutons principaux (9:1 sur prune). Texte prune sur crème à 15:1, rose ancien pour les chiffres (5,8:1).</p>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:48px;align-items:flex-start">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <p style="font-family:ui-monospace,Menlo,monospace;font-size:13px;margin:0;color:#5A4763">Bureau — 1280 px</p>
+      <iframe ref="{{ dRef }}" src="{{ pageSrc }}" title="Version bureau" width="1280" height="{{ hD }}" style="border:0;border-radius:6px;background:#FBF4EE;box-shadow:0 30px 60px -30px rgba(43,37,25,.35);display:block"></iframe>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <p style="font-family:ui-monospace,Menlo,monospace;font-size:13px;margin:0;color:#5A4763">Mobile — 390 px</p>
+      <iframe ref="{{ mRef }}" src="{{ pageSrc }}" title="Version mobile" width="390" height="{{ hM }}" style="border:0;border-radius:28px;background:#FBF4EE;box-shadow:0 30px 60px -30px rgba(43,37,25,.35);display:block"></iframe>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ pageMode }}" hint-placeholder-val="{{ false }}">
+<div style="background:#FBF4EE;color:#2A1E33">
+  <a href="#reserver" style="position:absolute;left:-9999px;top:8px;background:#2A1E33;color:#FBF4EE;padding:10px 14px;z-index:60" style-focus="left:8px">Aller à la réservation</a>
+
+  <nav aria-label="Navigation principale" style="position:sticky;top:0;z-index:50;background:rgba(42,30,51,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(251,244,238,.14)">
+    <div style="max-width:1200px;margin:0 auto;padding:14px clamp(20px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:24px">
+      <a href="#accueil" style="font-family:'Gloock',serif;font-size:26px;color:#FBF4EE;text-decoration:none;line-height:1">Gaia Voyance</a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;align-items:center;gap:32px">
+          <div style="display:flex;gap:28px;font-size:16px">
+            <a href="#seances" style="color:#FBF4EE;text-decoration:none" style-hover="color:#F2B98A;text-decoration:underline">Les séances</a>
+            <a href="#deroulement" style="color:#FBF4EE;text-decoration:none" style-hover="color:#F2B98A;text-decoration:underline">Déroulement</a>
+            <a href="#apropos" style="color:#FBF4EE;text-decoration:none" style-hover="color:#F2B98A;text-decoration:underline">À propos</a>
+            <a href="#faq" style="color:#FBF4EE;text-decoration:none" style-hover="color:#F2B98A;text-decoration:underline">Questions</a>
+          </div>
+          <a href="#reserver" style="background:#F2B98A;color:#2A1E33;text-decoration:none;padding:11px 20px;border-radius:999px;font-weight:700;font-size:15px" style-hover="background:#F6C9A2;color:#2A1E33">Réserver une séance</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-expanded="{{ menuOpen }}" style="font:inherit;font-size:16px;background:transparent;border:1px solid rgba(251,244,238,.45);color:#FBF4EE;border-radius:999px;padding:8px 16px;min-height:44px;cursor:pointer">{{ menuLabel }}</button>
+      </sc-if>
+    </div>
+    <sc-if value="{{ showMobileMenu }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;padding:4px 20px 18px;font-size:18px">
+        <a href="#seances" onClick="{{ closeMenu }}" style="color:#FBF4EE;text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(251,244,238,.14)">Les séances</a>
+        <a href="#deroulement" onClick="{{ closeMenu }}" style="color:#FBF4EE;text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(251,244,238,.14)">Déroulement</a>
+        <a href="#apropos" onClick="{{ closeMenu }}" style="color:#FBF4EE;text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(251,244,238,.14)">À propos</a>
+        <a href="#faq" onClick="{{ closeMenu }}" style="color:#FBF4EE;text-decoration:none;padding:12px 0">Questions</a>
+      </div>
+    </sc-if>
+  </nav>
+
+  <main>
+    <section id="accueil" data-screen-label="01 Accueil" style="position:relative;min-height:clamp(620px,92vh,980px);display:flex;align-items:flex-end;background:#2A1E33;color:#FBF4EE;overflow:hidden">
+      <div style="position:absolute;inset:0">
+        <image-slot id="gv5-hero" shape="rect" placeholder="Ciel pastel" src="https://images.unsplash.com/photo-1763257708417-1bbffa6a81c2?fm=jpg&amp;q=70&amp;w=2400&amp;auto=format&amp;fit=crop" credit="Photo by Logan Voss on Unsplash" credit-href="https://unsplash.com/@loganvoss"></image-slot>
+      </div>
+      <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(42,30,51,.55) 0%,rgba(42,30,51,.1) 24%,rgba(42,30,51,.35) 48%,rgba(42,30,51,.88) 86%,rgba(42,30,51,.45) 100%)"></div>
+      <div style="position:relative;width:100%;max-width:1280px;margin:0 auto;padding:clamp(120px,14vw,200px) clamp(20px,4vw,48px) clamp(56px,7vw,88px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,48px);align-items:end;pointer-events:none">
+        <h1 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(42px,6vw,80px);line-height:1.02;letter-spacing:-.02em;margin:0;text-wrap:balance;grid-column:span 1">{{ accroche }}</h1>
+        <div style="display:flex;flex-direction:column;gap:20px;max-width:440px">
+          <p style="font-size:clamp(18px,1.5vw,20px);line-height:1.6;margin:0;color:#F1E3E6;text-wrap:pretty">Canalisation avec vos guides ou avec un proche disparu. À Québec ou sur Zoom.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px 20px;align-items:center;pointer-events:auto">
+            <a href="#reserver" style="background:#F2B98A;color:#2A1E33;text-decoration:none;padding:16px 28px;border-radius:999px;font-weight:700;font-size:17px;min-height:52px;display:inline-flex;align-items:center" style-hover="background:#F6C9A2;color:#2A1E33">Réserver une séance</a>
+            <span style="font-size:15px;color:#F1E3E6">1 h · 120 $ · Tarot inclus</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="seances" data-screen-label="02 Les séances" aria-labelledby="seances-titre" style="background-color:#2A1E33;background-image:radial-gradient(1.5px 1.5px at 8% 14%,#F6DCC8 50%,transparent 51%),radial-gradient(1px 1px at 19% 62%,#F6DCC8 50%,transparent 51%),radial-gradient(1px 1px at 31% 28%,#D9CBE6 50%,transparent 51%),radial-gradient(2px 2px at 44% 9%,#F6DCC8 50%,transparent 51%),radial-gradient(1px 1px at 57% 74%,#D9CBE6 50%,transparent 51%),radial-gradient(1.5px 1.5px at 66% 22%,#F6DCC8 50%,transparent 51%),radial-gradient(1px 1px at 78% 51%,#F6DCC8 50%,transparent 51%),radial-gradient(1px 1px at 88% 12%,#D9CBE6 50%,transparent 51%),radial-gradient(1.5px 1.5px at 93% 83%,#F6DCC8 50%,transparent 51%),radial-gradient(1px 1px at 4% 88%,#D9CBE6 50%,transparent 51%),radial-gradient(1px 1px at 38% 92%,#F6DCC8 50%,transparent 51%),radial-gradient(ellipse 60% 45% at 50% 100%,rgba(242,185,138,.13),transparent 70%);color:#F3E8EC;position:relative">
+      <div style="max-width:1100px;margin:0 auto;padding:clamp(72px,10vw,136px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:clamp(48px,6vw,80px)">
+        <div style="display:flex;flex-direction:column;gap:20px;align-items:center;text-align:center">
+          <h2 id="seances-titre" style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(38px,5vw,60px);line-height:1.05;margin:0">Les séances</h2>
+          <p style="font-size:clamp(18px,1.6vw,20px);line-height:1.65;margin:0;color:#D9C8D6;max-width:46ch;text-wrap:pretty">Deux séances d'une heure, chacune accompagnée d'un tirage de tarot. Choisissez celle qui répond à ce que vous vivez aujourd'hui.</p>
+        </div>
+
+        <sc-if value="{{ sColonnes }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(48px,6vw,96px)">
+          <sc-for list="{{ seances }}" as="se" hint-placeholder-count="2">
+          <article style="display:flex;flex-direction:column;gap:22px;border-top:1px solid rgba(242,185,138,.45);padding-top:32px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px">
+              <h3 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(30px,3.2vw,40px);line-height:1.1;margin:0;color:#FBF4EE">{{ se.title }}</h3>
+              <span style="font-family:'Gloock',serif;font-size:20px;color:#F2B98A;white-space:nowrap">{{ se.n }}</span>
+            </div>
+            <p style="font-size:19px;line-height:1.7;margin:0;max-width:40ch;text-wrap:pretty">{{ se.desc }}</p>
+            <p style="font-size:16px;line-height:1.6;margin:0;color:#D9C8D6">Tarot inclus.</p>
+            <dl style="margin:auto 0 0;padding-top:8px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:16px">
+              <div style="display:flex;flex-direction:column;gap:2px"><dt style="color:#BBA8BC;font-size:14px">Durée</dt><dd style="margin:0">1 heure</dd></div>
+              <div style="display:flex;flex-direction:column;gap:2px"><dt style="color:#BBA8BC;font-size:14px">Format</dt><dd style="margin:0">Zoom ou en personne</dd></div>
+              <div style="display:flex;flex-direction:column;gap:2px"><dt style="color:#BBA8BC;font-size:14px">Prix</dt><dd style="margin:0;color:#F2B98A;font-weight:700">120 $</dd></div>
+            </dl>
+            <a href="#reserver" style="align-self:flex-start;background:#F2B98A;color:#2A1E33;text-decoration:none;padding:14px 24px;border-radius:999px;font-weight:700;font-size:16px;min-height:48px;display:inline-flex;align-items:center" style-hover="background:#F6C9A2;color:#2A1E33">Réserver cette séance</a>
+          </article>
+          </sc-for>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ sCartes }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(20px,2.4vw,32px)">
+          <sc-for list="{{ seances }}" as="se" hint-placeholder-count="2">
+          <article style="display:flex;flex-direction:column;gap:20px;background:#3A2B45;border-radius:14px;box-shadow:inset 0 0 0 1px rgba(242,185,138,.22);padding:clamp(28px,3.4vw,44px)">
+            <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.08em;color:#F2B98A">{{ se.pour }}</span>
+            <h3 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(30px,3.2vw,40px);line-height:1.1;margin:0;color:#FBF4EE">{{ se.title }}</h3>
+            <p style="font-size:19px;line-height:1.7;margin:0;max-width:40ch;text-wrap:pretty">{{ se.desc }}</p>
+            <div style="margin-top:auto;padding-top:20px;border-top:1px solid rgba(251,244,238,.14);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+              <span style="font-size:16px;color:#D9C8D6">1 h · Zoom ou en personne · Tarot inclus</span>
+              <span style="font-family:'Gloock',serif;font-size:32px;color:#F2B98A">120 $</span>
+            </div>
+            <a href="#reserver" style="align-self:flex-start;background:#F2B98A;color:#2A1E33;text-decoration:none;padding:14px 24px;border-radius:999px;font-weight:700;font-size:16px;min-height:48px;display:inline-flex;align-items:center" style-hover="background:#F6C9A2;color:#2A1E33">Réserver cette séance</a>
+          </article>
+          </sc-for>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ sTableau }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(242,185,138,.45)">
+          <div style="display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,40px);padding:28px 0;border-bottom:1px solid rgba(251,244,238,.14);align-items:end">
+            <span></span>
+            <h3 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(24px,3vw,38px);line-height:1.1;margin:0;color:#FBF4EE">Canalisation Guide</h3>
+            <h3 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(24px,3vw,38px);line-height:1.1;margin:0;color:#FBF4EE">Canalisation Défunt</h3>
+          </div>
+          <sc-for list="{{ tableRows }}" as="r" hint-placeholder-count="5">
+            <div style="display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,40px);padding:20px 0;border-bottom:1px solid rgba(251,244,238,.14);font-size:clamp(16px,1.5vw,18px);line-height:1.55">
+              <span style="color:#BBA8BC;font-size:15px">{{ r.k }}</span>
+              <span style="text-wrap:pretty">{{ r.a }}</span>
+              <span style="text-wrap:pretty">{{ r.b }}</span>
+            </div>
+          </sc-for>
+          <div style="display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1fr) minmax(0,1fr);gap:clamp(16px,3vw,40px);padding-top:28px">
+            <span></span>
+            <a href="#reserver" style="justify-self:start;background:#F2B98A;color:#2A1E33;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:700;font-size:16px;min-height:48px;display:inline-flex;align-items:center" style-hover="background:#F6C9A2;color:#2A1E33">Réserver</a>
+            <a href="#reserver" style="justify-self:start;background:#F2B98A;color:#2A1E33;text-decoration:none;padding:14px 22px;border-radius:999px;font-weight:700;font-size:16px;min-height:48px;display:inline-flex;align-items:center" style-hover="background:#F6C9A2;color:#2A1E33">Réserver</a>
+          </div>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ sLignes }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(242,185,138,.45)">
+          <sc-for list="{{ seances }}" as="se" hint-placeholder-count="2">
+          <article style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:24px clamp(40px,6vw,96px);padding:clamp(36px,5vw,64px) 0;border-bottom:1px solid rgba(242,185,138,.45)">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <span style="font-family:'Gloock',serif;font-size:20px;color:#F2B98A">{{ se.n }}</span>
+              <h3 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.4vw,56px);line-height:1.02;margin:0;color:#FBF4EE;text-wrap:balance">{{ se.title }}</h3>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:22px">
+              <p style="font-size:19px;line-height:1.7;margin:0;max-width:44ch;text-wrap:pretty">{{ se.desc }} Tarot inclus.</p>
+              <dl style="margin:0;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:16px">
+              <div style="display:flex;flex-direction:column;gap:2px"><dt style="color:#BBA8BC;font-size:14px">Durée</dt><dd style="margin:0">1 heure</dd></div>
+              <div style="display:flex;flex-direction:column;gap:2px"><dt style="color:#BBA8BC;font-size:14px">Format</dt><dd style="margin:0">Zoom ou en personne</dd></div>
+              <div style="display:flex;flex-direction:column;gap:2px"><dt style="color:#BBA8BC;font-size:14px">Prix</dt><dd style="margin:0;color:#F2B98A;font-weight:700">120 $</dd></div>
+            </dl>
+              <a href="#reserver" style="align-self:flex-start;background:#F2B98A;color:#2A1E33;text-decoration:none;padding:14px 24px;border-radius:999px;font-weight:700;font-size:16px;min-height:48px;display:inline-flex;align-items:center" style-hover="background:#F6C9A2;color:#2A1E33">Réserver cette séance</a>
+            </div>
+          </article>
+          </sc-for>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ sOnglets }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:clamp(32px,4vw,48px)">
+          <div role="tablist" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding:6px;border-radius:999px;box-shadow:inset 0 0 0 1px rgba(242,185,138,.45)">
+            <sc-for list="{{ sTabs }}" as="tb" hint-placeholder-count="2">
+              <button role="tab" aria-selected="{{ tb.on }}" onClick="{{ tb.pick }}" style="font:inherit;font-size:16px;font-weight:700;min-height:44px;padding:10px 22px;border:0;border-radius:999px;cursor:pointer;background:{{ tb.bg }};color:{{ tb.fg }}">{{ tb.pour }}</button>
+            </sc-for>
+          </div>
+          <article style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;max-width:640px">
+            <h3 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1.05;margin:0;color:#FBF4EE">{{ curS.title }}</h3>
+            <p style="font-size:clamp(19px,1.7vw,21px);line-height:1.7;margin:0;text-wrap:pretty">{{ curS.desc }}</p>
+            <p style="font-size:16px;margin:0;color:#D9C8D6">1 heure · Zoom ou en personne · Tarot inclus</p>
+            <span style="font-family:'Gloock',serif;font-size:44px;line-height:1;color:#F2B98A">120 $</span>
+            <a href="#reserver" style="background:#F2B98A;color:#2A1E33;text-decoration:none;padding:16px 28px;border-radius:999px;font-weight:700;font-size:17px;min-height:52px;display:inline-flex;align-items:center" style-hover="background:#F6C9A2;color:#2A1E33">Réserver cette séance</a>
+          </article>
+        </div>
+        </sc-if>
+
+        <sc-if value="{{ sChiffres }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(56px,6vw,96px)">
+          <sc-for list="{{ seances }}" as="se" hint-placeholder-count="2">
+          <article style="display:flex;flex-direction:column;gap:20px">
+            <span aria-hidden="true" style="font-family:'Gloock',serif;font-size:clamp(120px,14vw,180px);line-height:.8;color:#F2B98A;letter-spacing:-.02em">{{ se.n }}</span>
+            <h3 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(30px,3.2vw,40px);line-height:1.1;margin:0;color:#FBF4EE">{{ se.title }}</h3>
+            <p style="font-size:19px;line-height:1.7;margin:0;max-width:40ch;text-wrap:pretty">{{ se.desc }}</p>
+            <p style="font-size:16px;margin:0;color:#D9C8D6;padding-top:16px;border-top:1px solid rgba(251,244,238,.14)">1 h · Zoom ou en personne · Tarot inclus · <strong style="color:#F2B98A">120 $</strong></p>
+            <a href="#reserver" style="align-self:flex-start;background:#F2B98A;color:#2A1E33;text-decoration:none;padding:14px 24px;border-radius:999px;font-weight:700;font-size:16px;min-height:48px;display:inline-flex;align-items:center" style-hover="background:#F6C9A2;color:#2A1E33">Réserver cette séance</a>
+          </article>
+          </sc-for>
+        </div>
+        </sc-if>
+      </div>
+    </section>
+
+    <section id="deroulement" data-screen-label="03 Comment ça se passe" style="max-width:1200px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:clamp(40px,5vw,64px)">
+      <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.6vw,56px);line-height:1.05;margin:0;max-width:16ch">Comment ça se passe</h2>
+      <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:clamp(28px,3vw,40px)">
+        <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+          <li style="display:flex;flex-direction:column;gap:14px;border-top:1px solid rgba(30,25,17,.35);padding-top:20px">
+            <span aria-hidden="true" style="font-family:'Gloock',serif;font-size:56px;line-height:1;color:#9C4A6B">{{ s.n }}</span>
+            <p style="font-size:18px;line-height:1.6;margin:0;max-width:28ch;text-wrap:pretty">{{ s.text }}</p>
+          </li>
+        </sc-for>
+      </ol>
+    </section>
+
+    <section id="apropos" data-screen-label="04 À propos" style="background:#F3E7E4">
+      <div style="max-width:1100px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(40px,6vw,88px);align-items:center">
+        <div style="aspect-ratio:1/1;max-width:420px;width:100%;position:relative"><image-slot id="gv-apropos" shape="rounded" radius="10" placeholder="Photo de Gaia" src="https://images.unsplash.com/photo-1756732107862-8c33dc563001?fm=jpg&amp;q=70&amp;w=1200&amp;auto=format&amp;fit=crop" credit="Photo by T R on Unsplash" credit-href="https://unsplash.com/@tamrootbeer"></image-slot></div>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.6vw,56px);line-height:1.05;margin:0">À propos de Gaia</h2>
+          <p style="font-size:19px;line-height:1.7;margin:0;max-width:52ch;text-wrap:pretty">Je reçois à Québec et partout ailleurs par Zoom. Mes séances sont simples : un moment calme, une écoute attentive, et ce qui se présente, transmis avec honnêteté.</p>
+          <p style="font-size:19px;line-height:1.7;margin:0;max-width:52ch;text-wrap:pretty">Je ne promets rien d'autre que d'être présente avec vous. Vous repartez avec vos messages, et le temps de les laisser se poser.</p>
+          <p style="font-family:ui-monospace,Menlo,monospace;font-size:12px;margin:0;color:#6E5A75">Texte provisoire — à remplacer par la médium.</p>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ tGrille }}" hint-placeholder-val="{{ true }}">
+      <section id="temoignages" data-screen-label="05 Témoignages" style="max-width:1200px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:clamp(36px,4vw,56px)">
+        <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.6vw,56px);line-height:1.05;margin:0">Témoignages</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(32px,4vw,56px)">
+          <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+            <figure style="margin:0;display:flex;flex-direction:column;gap:16px">
+              <blockquote style="margin:0;font-family:'Gloock',serif;font-size:clamp(22px,2vw,26px);line-height:1.4;text-wrap:pretty">« {{ t.quote }} »</blockquote>
+              <figcaption style="font-size:15px;color:#5A4763;display:flex;flex-direction:column;gap:4px"><span>{{ t.who }}</span><span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#6E5A75">exemple — témoignage réel à fournir</span></figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ tUne }}" hint-placeholder-val="{{ false }}">
+      <section id="temoignages" data-screen-label="05 Témoignages" aria-roledescription="carrousel" style="max-width:920px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(28px,3vw,40px)">
+        <p style="font-family:ui-monospace,Menlo,monospace;font-size:13px;letter-spacing:.08em;margin:0;color:#9C4A6B">Témoignages</p>
+        <figure aria-live="polite" style="margin:0;display:flex;flex-direction:column;gap:24px;align-items:center;min-height:clamp(220px,22vw,260px);justify-content:center">
+          <blockquote style="margin:0;font-family:'Gloock',serif;font-size:clamp(30px,3.6vw,46px);line-height:1.25;text-wrap:balance">« {{ curT.quote }} »</blockquote>
+          <figcaption style="font-size:16px;color:#5A4763;display:flex;flex-direction:column;gap:4px"><span>{{ curT.who }}</span><span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#6E5A75">exemple — témoignage réel à fournir</span></figcaption>
+        </figure>
+        <div style="display:flex;align-items:center;gap:20px">
+          <button onClick="{{ prevT }}" aria-label="Témoignage précédent" style="font:inherit;font-size:20px;width:48px;height:48px;border-radius:999px;border:1px solid rgba(42,30,51,.4);background:transparent;color:#2A1E33;cursor:pointer" style-hover="background:#2A1E33;color:#FBF4EE">←</button>
+          <span style="font-family:'Gloock',serif;font-size:18px;color:#5A4763;min-width:48px">{{ tCounter }}</span>
+          <button onClick="{{ nextT }}" aria-label="Témoignage suivant" style="font:inherit;font-size:20px;width:48px;height:48px;border-radius:999px;border:1px solid rgba(42,30,51,.4);background:transparent;color:#2A1E33;cursor:pointer" style-hover="background:#2A1E33;color:#FBF4EE">→</button>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ tNocturne }}" hint-placeholder-val="{{ false }}">
+      <section id="temoignages" data-screen-label="05 Témoignages" style="background:#2A1E33;color:#FBF4EE">
+        <div style="max-width:1100px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:clamp(40px,5vw,72px)">
+          <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.6vw,56px);line-height:1.05;margin:0;text-align:center">Ce qu'ils en disent</h2>
+          <div style="display:flex;flex-direction:column;gap:clamp(40px,5vw,64px)">
+            <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+              <figure style="margin:0;display:flex;gap:clamp(14px,2vw,24px);max-width:680px;align-self:{{ t.side }}">
+                <span aria-hidden="true" style="font-family:'Gloock',serif;font-size:clamp(64px,7vw,96px);line-height:.8;color:#F2B98A;flex:none">«</span>
+                <div style="display:flex;flex-direction:column;gap:14px;padding-top:6px">
+                  <blockquote style="margin:0;font-family:'Gloock',serif;font-size:clamp(24px,2.4vw,32px);line-height:1.35;text-wrap:pretty">{{ t.quote }}</blockquote>
+                  <figcaption style="font-size:15px;color:#D9C8D6;display:flex;flex-direction:column;gap:4px"><span>{{ t.who }}</span><span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#BBA8BC">exemple — témoignage réel à fournir</span></figcaption>
+                </div>
+              </figure>
+            </sc-for>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ tCartes }}" hint-placeholder-val="{{ false }}">
+      <section id="temoignages" data-screen-label="05 Témoignages" style="max-width:1200px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:clamp(36px,4vw,56px)">
+        <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.6vw,56px);line-height:1.05;margin:0">Témoignages</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(20px,2.4vw,32px)">
+          <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+            <figure style="margin:0;background:#F3E7E4;border-radius:10px;box-shadow:inset 0 0 0 1px rgba(156,74,107,.22);padding:clamp(28px,3vw,40px);display:flex;flex-direction:column;gap:24px;min-height:340px">
+              <span aria-hidden="true" style="font-family:'Gloock',serif;font-size:22px;color:#9C4A6B;border-bottom:1px solid rgba(156,74,107,.3);padding-bottom:14px">{{ t.n }}</span>
+              <blockquote style="margin:0;font-family:'Gloock',serif;font-size:clamp(21px,1.9vw,24px);line-height:1.45;text-wrap:pretty">« {{ t.quote }} »</blockquote>
+              <figcaption style="margin-top:auto;font-size:15px;color:#5A4763;display:flex;flex-direction:column;gap:4px"><span style="color:#2A1E33;font-weight:500">{{ t.who }}</span><span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#6E5A75">exemple — témoignage réel à fournir</span></figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <sc-if value="{{ tListe }}" hint-placeholder-val="{{ false }}">
+      <section id="temoignages" data-screen-label="05 Témoignages" style="max-width:1100px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:clamp(32px,4vw,48px)">
+        <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.6vw,56px);line-height:1.05;margin:0">Témoignages</h2>
+        <div style="display:flex;flex-direction:column;border-top:1px solid rgba(30,25,17,.35)">
+          <sc-for list="{{ testimonials }}" as="t" hint-placeholder-count="3">
+            <figure style="margin:0;padding:clamp(28px,3.4vw,44px) 0;border-bottom:1px solid rgba(30,25,17,.35);display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px clamp(32px,5vw,72px);align-items:baseline">
+              <blockquote style="margin:0;font-family:'Gloock',serif;font-size:clamp(24px,2.6vw,34px);line-height:1.3;text-wrap:pretty;grid-column:span 2">« {{ t.quote }} »</blockquote>
+              <figcaption style="font-size:15px;color:#5A4763;display:flex;flex-direction:column;gap:4px"><span style="font-family:'Gloock',serif;font-size:20px;color:#9C4A6B">{{ t.n }}</span><span style="color:#2A1E33">{{ t.who }}</span><span style="font-family:ui-monospace,Menlo,monospace;font-size:11px;color:#6E5A75">exemple — témoignage réel à fournir</span></figcaption>
+            </figure>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+
+    <section id="reserver" data-screen-label="06 Réserver" style="background:#F3E7E4;border-top:1px solid rgba(43,37,25,.08);border-bottom:1px solid rgba(43,37,25,.08)">
+      <div style="max-width:1100px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:32px">
+        <div style="display:flex;flex-direction:column;gap:16px;max-width:620px">
+          <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.6vw,56px);line-height:1.05;margin:0">Réserver une séance</h2>
+          <p style="font-size:19px;line-height:1.7;margin:0;text-wrap:pretty">Choisissez la séance, puis la plage horaire qui vous convient. Vous recevrez une confirmation par courriel.</p>
+        </div>
+        <div style="height:700px;border-radius:10px;background:#FBF4EE repeating-linear-gradient(135deg,rgba(43,37,25,.05) 0 8px,transparent 8px 16px);border:1px dashed rgba(43,37,25,.35);display:flex;align-items:center;justify-content:center;padding:24px;text-align:center">
+          <span style="font-family:ui-monospace,Menlo,monospace;font-size:13px;line-height:1.5;color:#5A4763;max-width:32ch">Calendrier Cal.com intégré ici — env. 700 px de haut</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" data-screen-label="07 FAQ" style="max-width:860px;margin:0 auto;padding:clamp(72px,9vw,128px) clamp(20px,4vw,40px);display:flex;flex-direction:column;gap:clamp(32px,4vw,48px)">
+      <h2 style="font-family:'Gloock',serif;font-weight:400;font-size:clamp(36px,4.6vw,56px);line-height:1.05;margin:0">Questions fréquentes</h2>
+      <div style="display:flex;flex-direction:column;border-top:1px solid rgba(30,25,17,.35)">
+        <sc-for list="{{ faq }}" as="f" hint-placeholder-count="5">
+          <details style="border-bottom:1px solid rgba(30,25,17,.35)">
+            <summary style="display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font-size:clamp(18px,1.6vw,20px);font-weight:700;min-height:44px">
+              <span>{{ f.q }}</span>
+              <span class="fq-sign" aria-hidden="true" style="font-family:'Gloock',serif;font-size:30px;line-height:1;color:#4A3358;transition:transform .2s;flex:none">+</span>
+            </summary>
+            <p style="margin:0 0 24px;font-size:18px;line-height:1.7;color:#5A4763;max-width:60ch">Réponse à fournir par Gaia.</p>
+          </details>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:#2A1E33;color:#F3E8EC">
+    <div style="max-width:1200px;margin:0 auto;padding:56px clamp(20px,4vw,40px);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:28px">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <span style="font-family:'Gloock',serif;font-size:30px;line-height:1">Gaia Voyance</span>
+        <span style="font-size:16px;color:#C9B6C6">Québec</span>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:12px 28px;font-size:16px">
+        <a href="#" style="color:#F3E8EC" style-hover="color:#F2B98A">courriel à venir</a>
+        <a href="#" style="color:#F3E8EC" style-hover="color:#F2B98A">Instagram</a>
+        <a href="#" style="color:#F3E8EC" style-hover="color:#F2B98A">Facebook</a>
+      </div>
+    </div>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}"><div style="height:84px"></div></sc-if>
+  </footer>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <a href="#reserver" style="position:fixed;left:16px;right:16px;bottom:16px;z-index:40;background:#F2B98A;color:#2A1E33;text-decoration:none;border-radius:999px;min-height:52px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;box-shadow:0 10px 24px -10px rgba(43,37,25,.55)">Réserver une séance</a>
+  </sc-if>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accroche&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Moment calme&quot;,&quot;Ce que vous portez&quot;,&quot;Espace doux&quot;],&quot;default&quot;:&quot;Moment calme&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contenu&quot;},&quot;temoignages&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Grille&quot;,&quot;Une à la fois&quot;,&quot;Nocturne&quot;,&quot;Cartes&quot;,&quot;Liste&quot;],&quot;default&quot;:&quot;Grille&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contenu&quot;},&quot;showTestimonials&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Contenu&quot;},&quot;seancesStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Colonnes&quot;,&quot;Cartes&quot;,&quot;Tableau&quot;,&quot;Lignes&quot;,&quot;Onglets&quot;,&quot;Grands chiffres&quot;],&quot;default&quot;:&quot;Colonnes&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Contenu&quot;}}">
+class Component extends DCLogic {
+  state = { w: window.innerWidth, menu: false, ti: 0, si: 0, hD: 6400, hM: 9600 };
+  dRef = React.createRef();
+  mRef = React.createRef();
+  componentDidMount() {
+    this.onR = () => this.setState({ w: window.innerWidth });
+    window.addEventListener('resize', this.onR);
+    this.poll = setInterval(() => {
+      const m = (r) => { try { const d = r.current && r.current.contentDocument; const f = d && d.querySelector('footer'); return f ? Math.ceil(f.getBoundingClientRect().bottom + d.documentElement.scrollTop) : 0; } catch (e) { return 0; } };
+      const hD = m(this.dRef), hM = m(this.mRef);
+      if (hD > 400 && hD !== this.state.hD) this.setState({ hD });
+      if (hM > 400 && hM !== this.state.hM) this.setState({ hM });
+    }, 700);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this.onR); clearInterval(this.poll); }
+  renderVals() {
+    const q = new URLSearchParams(location.search);
+    const pageMode = q.has('gv_page');
+    const p = this.props;
+    const accroches = [
+      'Un moment calme pour recevoir ce qui cherche à vous parvenir.',
+      'Ce que vous portez mérite d\u2019être entendu.',
+      'Un espace doux pour entendre vos guides et ceux qui sont partis.'
+    ];
+    const ai = pageMode && q.has('gv_a') ? +q.get('gv_a') : ({ 'Moment calme': 0, 'Ce que vous portez': 1, 'Espace doux': 2 }[p.accroche] ?? 0);
+    const showT = pageMode && q.has('gv_t') ? q.get('gv_t') === '1' : (p.showTestimonials ?? true);
+    const sStyles = ['Colonnes', 'Cartes', 'Tableau', 'Lignes', 'Onglets', 'Grands chiffres'];
+    const ssi = pageMode && q.has('gv_ss') ? +q.get('gv_ss') : Math.max(0, sStyles.indexOf(p.seancesStyle ?? 'Colonnes'));
+    const seances = [
+      { n: 'I.', title: 'Canalisation Guide', pour: 'Pour vous', desc: 'Une rencontre avec vos guides, pour recevoir des réponses et un éclairage sur ce que vous traversez.' },
+      { n: 'II.', title: 'Canalisation Défunt', pour: 'Pour un proche disparu', desc: 'Une rencontre pour recevoir des messages d\u2019un proche décédé.' }
+    ];
+    const si = this.state.si;
+    const tStyles = ['Grille', 'Une à la fois', 'Nocturne', 'Cartes', 'Liste'];
+    const tsi = pageMode && q.has('gv_ts') ? +q.get('gv_ts') : Math.max(0, tStyles.indexOf(p.temoignages ?? 'Grille'));
+    const testimonials = [
+      { quote: 'Je suis arrivée nerveuse. Je suis repartie apaisée, avec des mots que je relis encore.', who: 'Marie-Claude, Lévis' },
+      { quote: 'Des détails que personne ne pouvait connaître. Et beaucoup de douceur.', who: 'Julien, Québec' },
+      { quote: 'Une heure simple et sérieuse. C\u2019est ce dont j\u2019avais besoin.', who: 'Nathalie, en ligne' }
+    ].map((t, i) => ({ ...t, n: ['I.', 'II.', 'III.'][i], side: i % 2 ? 'flex-end' : 'flex-start' }));
+    const ti = this.state.ti % testimonials.length;
+    const isMobile = this.state.w < 760;
+    return {
+      pageMode, sheetMode: !pageMode,
+      pageSrc: (() => { const u = new URLSearchParams(location.search); u.set('gv_page', '1'); u.set('gv_a', ai); u.set('gv_t', showT ? 1 : 0); u.set('gv_ss', ssi); u.set('gv_ts', tsi); return location.pathname + '?' + u; })(),
+      dRef: this.dRef, mRef: this.mRef, hD: this.state.hD, hM: this.state.hM,
+      isMobile, isDesktop: !isMobile,
+      menuOpen: this.state.menu, showMobileMenu: isMobile && this.state.menu,
+      menuLabel: this.state.menu ? 'Fermer' : 'Menu',
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false }),
+      accroche: accroches[ai] || accroches[0],
+      sColonnes: ssi === 0, sCartes: ssi === 1, sTableau: ssi === 2, sLignes: ssi === 3, sOnglets: ssi === 4, sChiffres: ssi === 5,
+      seances, curS: seances[si],
+      sTabs: seances.map((x, i) => ({ pour: x.pour, on: i === si, bg: i === si ? '#F2B98A' : 'transparent', fg: i === si ? '#2A1E33' : '#FBF4EE', pick: () => this.setState({ si: i }) })),
+      tableRows: [
+        { k: 'Pour qui', a: 'Vous, ce que vous traversez', b: 'Un proche décédé' },
+        { k: 'Ce que vous recevez', a: 'Réponses et éclairage de vos guides', b: 'Messages de la personne disparue' },
+        { k: 'Durée', a: '1 heure', b: '1 heure' },
+        { k: 'Format', a: 'Zoom ou en personne', b: 'Zoom ou en personne' },
+        { k: 'Tarot', a: 'Inclus', b: 'Inclus' },
+        { k: 'Prix', a: '120 $', b: '120 $' }
+      ],
+      tGrille: showT && tsi === 0, tUne: showT && tsi === 1, tNocturne: showT && tsi === 2, tCartes: showT && tsi === 3, tListe: showT && tsi === 4,
+      testimonials, curT: testimonials[ti], tCounter: (ti + 1) + ' / ' + testimonials.length,
+      prevT: () => this.setState(s => ({ ti: (s.ti + testimonials.length - 1) % testimonials.length })),
+      nextT: () => this.setState(s => ({ ti: (s.ti + 1) % testimonials.length })),
+      palette: [
+        { name: 'Crème rosée', hex: '#FBF4EE', role: 'Fond principal' },
+        { name: 'Papier rose', hex: '#F3E7E4', role: 'Sections alternées' },
+        { name: 'Prune', hex: '#2A1E33', role: 'Texte, menu, séances, pied de page' },
+        { name: 'Prune douce', hex: '#5A4763', role: 'Texte secondaire' },
+        { name: 'Aubergine', hex: '#4A3358', role: 'Boutons et liens sur clair' },
+        { name: 'Rose ancien', hex: '#9C4A6B', role: 'Grands chiffres' },
+        { name: 'Lavande', hex: '#BBA8BC', role: 'Texte discret sur prune' },
+        { name: 'Abricot', hex: '#F2B98A', role: 'Boutons principaux' }
+      ],
+      steps: [
+        { n: '1', text: 'Vous choisissez une séance et une plage horaire.' },
+        { n: '2', text: 'Vous recevez un courriel de confirmation avec tous les détails.' },
+        { n: '3', text: 'Nous nous rencontrons, en personne ou sur Zoom.' },
+        { n: '4', text: 'Vous repartez avec ce qui a été reçu pendant la séance.' }
+      ],
+      faq: [
+        { q: 'Comment se déroule une séance?' },
+        { q: 'Zoom ou en personne, quelle différence?' },
+        { q: 'Comment payer?' },
+        { q: 'Puis-je annuler ou changer l\u2019heure?' },
+        { q: 'Que dois-je apporter ou préparer?' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

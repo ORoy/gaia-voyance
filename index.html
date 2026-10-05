@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gaia Voyance — Médium à Québec</title>
+<meta name="description" content="Canalisation avec vos guides ou avec un proche disparu. Séances d'une heure, tarot inclus, à Québec ou sur Zoom.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#reserver">Aller à la réservation</a>
+
+<nav class="nav" aria-label="Navigation principale">
+  <div class="nav-in">
+    <a class="logo" href="#accueil">Gaia Voyance</a>
+    <div class="nav-links" id="menu">
+      <a href="#seances">Les séances</a>
+      <a href="#deroulement">Déroulement</a>
+      <a href="#apropos">À propos</a>
+      <a href="#faq">Questions</a>
+      <a class="btn btn-sm nav-cta" href="#reserver">Réserver une séance</a>
+    </div>
+    <button class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="menu">Menu</button>
+  </div>
+</nav>
+
+<main>
+  <section id="accueil" class="hero">
+    <img class="hero-img" src="https://images.unsplash.com/photo-1763257708417-1bbffa6a81c2?fm=jpg&q=70&w=2400&auto=format&fit=crop" alt="" fetchpriority="high">
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-in">
+      <h1>Un moment calme pour recevoir ce qui cherche à vous parvenir.</h1>
+      <div class="hero-side">
+        <p>Canalisation avec vos guides ou avec un proche disparu. À Québec ou sur Zoom.</p>
+        <div class="hero-cta">
+          <a class="btn" href="#reserver">Réserver une séance</a>
+          <span>1 h · 120 $ · Tarot inclus</span>
+        </div>
+      </div>
+    </div>
+    <span class="credit"><a href="https://unsplash.com/@loganvoss">Photo : Logan Voss, Unsplash</a></span>
+  </section>
+
+  <section id="seances" class="night" aria-labelledby="seances-titre">
+    <div class="wrap-night">
+      <div class="night-head">
+        <h2 id="seances-titre">Les séances</h2>
+        <p>Deux séances d'une heure, chacune accompagnée d'un tirage de tarot. Choisissez celle qui répond à ce que vous vivez aujourd'hui.</p>
+      </div>
+      <div class="seances">
+        <article class="seance">
+          <div class="seance-top"><h3>Canalisation Guide</h3><span class="num">I.</span></div>
+          <p class="seance-desc">Une rencontre avec vos guides, pour recevoir des réponses et un éclairage sur ce que vous traversez.</p>
+          <p class="seance-tarot">Tarot inclus.</p>
+          <dl>
+            <div><dt>Durée</dt><dd>1 heure</dd></div>
+            <div><dt>Format</dt><dd>Zoom ou en personne</dd></div>
+            <div><dt>Prix</dt><dd class="price">120 $</dd></div>
+          </dl>
+          <a class="btn btn-md" href="#reserver">Réserver cette séance</a>
+        </article>
+        <article class="seance">
+          <div class="seance-top"><h3>Canalisation Défunt</h3><span class="num">II.</span></div>
+          <p class="seance-desc">Une rencontre pour recevoir des messages d'un proche décédé.</p>
+          <p class="seance-tarot">Tarot inclus.</p>
+          <dl>
+            <div><dt>Durée</dt><dd>1 heure</dd></div>
+            <div><dt>Format</dt><dd>Zoom ou en personne</dd></div>
+            <div><dt>Prix</dt><dd class="price">120 $</dd></div>
+          </dl>
+          <a class="btn btn-md" href="#reserver">Réserver cette séance</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="deroulement" class="wrap sec">
+    <h2>Comment ça se passe</h2>
+    <ol class="steps">
+      <li><span class="step-n" aria-hidden="true">1</span><p>Vous choisissez une séance et une plage horaire.</p></li>
+      <li><span class="step-n" aria-hidden="true">2</span><p>Vous recevez un courriel de confirmation avec tous les détails.</p></li>
+      <li><span class="step-n" aria-hidden="true">3</span><p>Nous nous rencontrons, en personne ou sur Zoom.</p></li>
+      <li><span class="step-n" aria-hidden="true">4</span><p>Vous repartez avec ce qui a été reçu pendant la séance.</p></li>
+    </ol>
+  </section>
+
+  <section id="apropos" class="alt">
+    <div class="about">
+      <figure class="portrait">
+        <img src="https://images.unsplash.com/photo-1756732107862-8c33dc563001?fm=jpg&q=70&w=1200&auto=format&fit=crop" alt="Photo provisoire" loading="lazy">
+        <figcaption><a href="https://unsplash.com/@tamrootbeer">Photo : T R, Unsplash</a></figcaption>
+      </figure>
+      <div class="about-text">
+        <h2>À propos de Gaia</h2>
+        <p>Je reçois à Québec et partout ailleurs par Zoom. Mes séances sont simples : un moment calme, une écoute attentive, et ce qui se présente, transmis avec honnêteté.</p>
+        <p>Je ne promets rien d'autre que d'être présente avec vous. Vous repartez avec vos messages, et le temps de les laisser se poser.</p>
+        <p class="todo">Texte provisoire — à remplacer par la médium.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section masquable si vide au lancement : ajouter l'attribut hidden -->
+  <section id="temoignages" class="wrap sec">
+    <h2>Témoignages</h2>
+    <div class="quotes">
+      <figure>
+        <blockquote>« Je suis arrivée nerveuse. Je suis repartie apaisée, avec des mots que je relis encore. »</blockquote>
+        <figcaption>Marie-Claude, Lévis<span class="todo">exemple — témoignage réel à fournir</span></figcaption>
+      </figure>
+      <figure>
+        <blockquote>« Des détails que personne ne pouvait connaître. Et beaucoup de douceur. »</blockquote>
+        <figcaption>Julien, Québec<span class="todo">exemple — témoignage réel à fournir</span></figcaption>
+      </figure>
+      <figure>
+        <blockquote>« Une heure simple et sérieuse. C'est ce dont j'avais besoin. »</blockquote>
+        <figcaption>Nathalie, en ligne<span class="todo">exemple — témoignage réel à fournir</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="reserver" class="alt booking">
+    <div class="wrap sec">
+      <div class="booking-head">
+        <h2>Réserver une séance</h2>
+        <p>Choisissez la séance, puis la plage horaire qui vous convient. Vous recevrez une confirmation par courriel.</p>
+      </div>
+      <!-- Remplacer ce bloc par l'intégration Cal.com (~700 px de haut) -->
+      <div class="cal"><span>Calendrier Cal.com intégré ici — env. 700 px de haut</span></div>
+    </div>
+  </section>
+
+  <section id="faq" class="wrap sec faq">
+    <h2>Questions fréquentes</h2>
+    <div class="faq-list">
+      <details><summary><span>Comment se déroule une séance?</span><span class="sign" aria-hidden="true">+</span></summary><p>Réponse à fournir par Gaia.</p></details>
+      <details><summary><span>Zoom ou en personne, quelle différence?</span><span class="sign" aria-hidden="true">+</span></summary><p>Réponse à fournir par Gaia.</p></details>
+      <details><summary><span>Comment payer?</span><span class="sign" aria-hidden="true">+</span></summary><p>Réponse à fournir par Gaia.</p></details>
+      <details><summary><span>Puis-je annuler ou changer l'heure?</span><span class="sign" aria-hidden="true">+</span></summary><p>Réponse à fournir par Gaia.</p></details>
+      <details><summary><span>Que dois-je apporter ou préparer?</span><span class="sign" aria-hidden="true">+</span></summary><p>Réponse à fournir par Gaia.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-brand"><span class="logo">Gaia Voyance</span><span>Québec</span></div>
+    <div class="foot-links">
+      <a href="#">courriel à venir</a>
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+    </div>
+  </div>
+  <div class="foot-pad"></div>
+</footer>
+
+<a class="sticky-cta" href="#reserver">Réserver une séance</a>
+
+<script src="script.js"></script>
+</body>
+</html>
